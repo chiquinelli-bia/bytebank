@@ -1,4 +1,6 @@
 import { Chart, registerables } from "chart.js";
+import axios from "axios";
+
 Chart.register(...registerables);
 const grafico = document.getElementById("grafico");
 const graficoParaDolar = new Chart(grafico, {
@@ -14,3 +16,12 @@ const graficoParaDolar = new Chart(grafico, {
     ],
   },
 });
+async function apiMoedas() {
+  const response = await axios.get(
+    "https://economia.awesomeapi.com.br/json/last/USD-BRL"
+  );
+  console.log(response);
+  return await response.data;
+}
+
+apiMoedas();
