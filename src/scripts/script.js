@@ -6,21 +6,24 @@ const grafico = document.getElementById("grafico");
 const graficoParaDolar = new Chart(grafico, {
   type: "line",
   data: {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    labels: [],
     datasets: [
       {
-        label: "# of Votes",
-        data: [12, 19, 3, 5, 2, 3],
+        label: "Dolar",
+        data: [],
         borderWidth: 1,
       },
     ],
   },
 });
+setInterval(() => apiMoedas(), 5000);
 async function apiMoedas() {
   const response = await axios.get(
     "https://economia.awesomeapi.com.br/json/last/USD-BRL"
   );
-  console.log(response);
+  let temp = horario();
+  let value = response.data.USDBRL.ask;
+  atualizaGrafico(graficoParaDolar, temp, value);
   return await response.data;
 }
 
@@ -30,8 +33,15 @@ function horario() {
   let data = new Date();
   let horario =
     data.getHours() + ":" + data.getMinutes() + ":" + data.getSeconds();
-  console.log(horario);
   return horario;
 }
 
 horario();
+
+function atualizaGrafico(grafico, legenda, dados) {
+  grafico.data.labels.push(legenda);
+  grafico.data.datasets.forEach((datasets) => {
+    datasets.data.push(dados);
+  });
+  grafico.update();
+}
