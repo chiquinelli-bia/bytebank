@@ -24,6 +24,7 @@ async function apiMoedas() {
   let temp = horario();
   let value = response.data.USDBRL.ask;
   atualizaGrafico(graficoParaDolar, temp, value);
+  imprimeCotação("Dólar", value);
   return await response.data;
 }
 
@@ -45,3 +46,16 @@ function atualizaGrafico(grafico, legenda, dados) {
   });
   grafico.update();
 }
+//cotação
+const listaCotação = document.querySelector("[data-lista]");
+function imprimeCotação(nome, valor) {
+  listaCotação.innerHTML = "";
+  for (let multiplicador = 1; multiplicador <= 1000; multiplicador *= 10) {
+    const itemLista = document.createElement("li");
+    itemLista.innerHTML = `${multiplicador} ${nome}: R$${(
+      valor * multiplicador
+    ).toFixed(2)}`;
+    listaCotação.appendChild(itemLista);
+  }
+}
+//export default imprimeCotação
