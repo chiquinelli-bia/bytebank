@@ -1,9 +1,8 @@
 import { Chart, registerables } from "chart.js";
-import axios from "axios";
 
 Chart.register(...registerables);
-const grafico = document.getElementById("grafico");
-const graficoParaDolar = new Chart(grafico, {
+const graficoDolar = document.getElementById("graficoDolar");
+const graficoParaDolar = new Chart(graficoDolar, {
   type: "line",
   data: {
     labels: [],
@@ -16,19 +15,6 @@ const graficoParaDolar = new Chart(grafico, {
     ],
   },
 });
-setInterval(() => apiMoedas(), 5000);
-async function apiMoedas() {
-  const response = await axios.get(
-    "https://economia.awesomeapi.com.br/json/last/USD-BRL"
-  );
-  let temp = horario();
-  let value = response.data.USDBRL.ask;
-  atualizaGrafico(graficoParaDolar, temp, value);
-  imprimeCotação("Dólar", value);
-  return await response.data;
-}
-
-apiMoedas();
 
 function horario() {
   let data = new Date();
@@ -66,8 +52,34 @@ const workerDolar = new Worker(
 );
 workerDolar.postMessage("usd");
 workerDolar.addEventListener("message", (event) => {
-  let tempo = geraHorario();
-  let valor = event.data.ask;
+  let tempo = horario();
+  let valor = event.data.USDBRL.ask;
   imprimeCotação("dolar", valor);
   atualizaGrafico(graficoParaDolar, tempo, valor);
+});
+
+const graficoIene = document.getElementById("graficoIene");
+const graficoParaIene = new Chart(graficoIene, {
+  type: "line",
+  data: {
+    labels: [],
+    datasets: [
+      {
+        label: "Iene",
+        data: [],
+        borderWidth: 1,
+      },
+    ],
+  },
+});
+const workerIene = new Worker(
+  new URL("../scripts/worker/workerIene.js", import.meta.url),
+  { type: "module" }
+);
+workerIene.postMessage("iene");
+workerIene.addEventListener("message", (event) => {
+  let tempo = horario();
+  let valor = event.data.JPYBRL.ask;
+  imprimeCotação("iene", valor);
+  atualizaGrafico(graficoParaIene, tempo, valor);
 });
