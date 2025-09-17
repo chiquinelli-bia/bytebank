@@ -33,18 +33,29 @@ function atualizaGrafico(grafico, legenda, dados) {
   grafico.update();
 }
 //cotação
-const listaCotação = document.querySelector("[data-lista]");
-function imprimeCotação(nome, valor) {
-  listaCotação.innerHTML = "";
+const listaCotacao = document.querySelectorAll("[data-lista]");
+function cotacao(nome, valor) {
+  listaCotacao.forEach((lista) => {
+    if (lista.id === nome) {
+      imprimeCotacao(lista, nome, valor);
+    }
+  });
+}
+function imprimeCotacao(listaCotacao, nome, valor) {
+  listaCotacao.innerHTML = "";
+  const plurais = {
+    dolar: "dolares",
+    iene: "ienes",
+  };
   for (let multiplicador = 1; multiplicador <= 1000; multiplicador *= 10) {
     const itemLista = document.createElement("li");
-    itemLista.innerHTML = `${multiplicador} ${nome}: R$${(
-      valor * multiplicador
-    ).toFixed(2)}`;
-    listaCotação.appendChild(itemLista);
+    itemLista.innerHTML = `${multiplicador} ${
+      multiplicador == 1 ? nome : plurais[nome]
+    }: R$${(valor * multiplicador).toFixed(2)}`;
+    listaCotacao.appendChild(itemLista);
   }
 }
-//export default imprimeCotação
+//export default imprimeCotacao
 
 const workerDolar = new Worker(
   new URL("../scripts/worker/workerDolar.js", import.meta.url),
@@ -54,7 +65,7 @@ workerDolar.postMessage("usd");
 workerDolar.addEventListener("message", (event) => {
   let tempo = horario();
   let valor = event.data.USDBRL.ask;
-  imprimeCotação("dolar", valor);
+  cotacao("dolar", valor);
   atualizaGrafico(graficoParaDolar, tempo, valor);
 });
 
@@ -80,6 +91,6 @@ workerIene.postMessage("iene");
 workerIene.addEventListener("message", (event) => {
   let tempo = horario();
   let valor = event.data.JPYBRL.ask;
-  imprimeCotação("iene", valor);
+  cotacao("iene", valor);
   atualizaGrafico(graficoParaIene, tempo, valor);
 });
