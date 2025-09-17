@@ -59,3 +59,15 @@ function imprimeCotação(nome, valor) {
   }
 }
 //export default imprimeCotação
+
+const workerDolar = new Worker(
+  new URL("../scripts/worker/workerDolar.js", import.meta.url),
+  { type: "module" }
+);
+workerDolar.postMessage("usd");
+workerDolar.addEventListener("message", (event) => {
+  let tempo = geraHorario();
+  let valor = event.data.ask;
+  imprimeCotação("dolar", valor);
+  atualizaGrafico(graficoParaDolar, tempo, valor);
+});
