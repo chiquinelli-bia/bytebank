@@ -46,6 +46,7 @@ function imprimeCotacao(listaCotacao, nome, valor) {
   const plurais = {
     dolar: "dolares",
     iene: "ienes",
+    euro: "euros",
   };
   for (let multiplicador = 1; multiplicador <= 1000; multiplicador *= 10) {
     const itemLista = document.createElement("li");
@@ -93,4 +94,29 @@ workerIene.addEventListener("message", (event) => {
   let valor = event.data.JPYBRL.ask;
   cotacao("iene", valor);
   atualizaGrafico(graficoParaIene, tempo, valor);
+});
+const graficoEuro = document.getElementById("graficoEuro");
+const graficoParaEuro = new Chart(graficoEuro, {
+  type: "line",
+  data: {
+    labels: [],
+    datasets: [
+      {
+        label: "Euro",
+        data: [],
+        borderWidth: 1,
+      },
+    ],
+  },
+});
+const workerEuro = new Worker(
+  new URL("../scripts/worker/workerEuro.js", import.meta.url),
+  { type: "module" }
+);
+workerEuro.postMessage("Euro");
+workerEuro.addEventListener("message", (event) => {
+  let tempo = horario();
+  let valor = event.data.EURBRL.ask;
+  cotacao("euro", valor);
+  atualizaGrafico(graficoParaEuro, tempo, valor);
 });
