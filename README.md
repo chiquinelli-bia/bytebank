@@ -20,7 +20,7 @@ Com integração de Axios e Chart.js, o projeto reforça boas práticas de visua
 - **Paralelismo e Performance:** Implementei _multithreads_ com _Workers,_ para consultas simultâneas à API via _Axios_ para melhor desempenho.
 - **Estrutura e Escalabilidade:** Usei _Vite_ para inicialização rápida, suporte a módulos ES e build otimizado, além de refatorar caminhos de arquivos e imagens para manutenção e escalabilidade.
 
-![Demonstração do ByteBank: Tela de painel financeiro exibindo gráficos de variação de cotações de moedas e horário da variação, atualizando a cada 5 segundos. À direita uma lista de conversão da moeda para real. A barra lateral esquerda apresenta opções de navegação e um avatar. O tom é informativo.](https://imgur.com/gallery/projeto-bytebank-WmwOjRP#1AWAZmD)
+![Demonstração do ByteBank: Tela de painel financeiro exibindo gráficos de variação de cotações de moedas e horário da variação, atualizando a cada 5 segundos. À direita uma lista de conversão da moeda para real. A barra lateral esquerda apresenta opções de navegação e um avatar. O tom é informativo.](https://i.imgur.com/1AWAZmD.png)
 
 ## Tecnologias Utilizadas
 
