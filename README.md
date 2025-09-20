@@ -52,8 +52,28 @@ Com integração de Axios e Chart.js, o projeto reforça boas práticas de visua
 
    ```
 
-2. Navegue pelas funcionalidades implementadas.
+2. Acesse a pasta do projeto:
 
+   ```bash
+   cd bytebank
+
+   ```
+
+3. Instale as dependências:
+
+   ```bash
+   npm install
+
+   ```
+
+4. Inicie o servidor de desenvolvimento:
+
+   ```bash
+   npm run dev
+
+   ```
+
+5. Abra no navegador o endereço exibido no terminal e Navegue pelas funcionalidades implementadas.
 ## Créditos
 
 - Projeto original: ![Acesse aqui.](https://github.com/alura-cursos/bytebank-javascript/tree/main)
