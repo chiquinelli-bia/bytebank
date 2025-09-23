@@ -14,6 +14,9 @@ const graficoParaDolar = new Chart(graficoDolar, {
       },
     ],
   },
+  option: {
+    responsive: true, // mantém responsivo
+  },
 });
 
 function horario() {
