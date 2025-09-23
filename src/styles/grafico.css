@@ -70,10 +70,13 @@
     gap: 1em;
   }
   .grafico__titulo span {
-    width: 6em;
+    width: 3em;
     height: 3em;
   }
   .grafico__titulo h2 {
+    font-size: 20px;
+  }
+  h2 {
     font-size: 20px;
   }
   .investimentos__lista {

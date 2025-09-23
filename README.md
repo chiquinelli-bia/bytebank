@@ -74,6 +74,7 @@ Com integração de Axios e Chart.js, o projeto reforça boas práticas de visua
    ```
 
 5. Abra no navegador o endereço exibido no terminal e Navegue pelas funcionalidades implementadas.
+
 ## Créditos
 
 - Projeto original: ![Acesse aqui.](https://github.com/alura-cursos/bytebank-javascript/tree/main)
