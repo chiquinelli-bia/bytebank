@@ -26,6 +26,11 @@
   grid-template-columns: 20% auto;
   background-color: var(--lilas);
 }
+.link__disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
 
 @media (max-width: 700px) {
   .container {
