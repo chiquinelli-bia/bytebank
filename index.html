@@ -15,13 +15,23 @@
 
   <body class="container">
     <aside class="sidebar">
-      <img src="./src/imagens/logo.png" alt="Logo do bytebank" />
+      <input id="menu-toggle" type="checkbox" />
+      <label class="menu-button-container" for="menu-toggle">
+        <div class="menu-button"></div>
+      </label>
+
       <img
-        src="./src/imagens/avatar.png"
-        alt="Avatar do usuário"
-        class="sidebar__avatar"
+        src="./src/imagens/logo.png"
+        alt="Logo do bytebank"
+        class="sidebar__logo"
       />
-      <h2>Moni Hillman</h2>
+      <div class="container__avatar">
+        <img
+          src="./src/imagens/avatar.png"
+          alt="Foto do usuário"
+          class="sidebar__avatar"
+        />
+      </div>
       <hr class="sidebar__linha" />
       <nav class="sidebar__links">
         <a href="#"><span class="links__icone dashboard"></span>Dashboard</a>

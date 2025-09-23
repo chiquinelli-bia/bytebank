@@ -55,3 +55,29 @@
 .investimentos__lista li {
   margin: 1em 0;
 }
+
+@media (max-width: 700px) {
+  .dadosDolar,
+  .dadosEuro,
+  .dadosIene {
+    width: 90%;
+    flex-direction: column;
+  }
+  .grafico {
+    width: auto;
+  }
+  .grafico__titulo {
+    gap: 1em;
+  }
+  .grafico__titulo span {
+    width: 6em;
+    height: 3em;
+  }
+  .grafico__titulo h2 {
+    font-size: 20px;
+  }
+  .investimentos__lista {
+    line-height: 15px;
+    margin: auto;
+  }
+}
