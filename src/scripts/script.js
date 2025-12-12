@@ -15,7 +15,7 @@ const graficoParaDolar = new Chart(graficoDolar, {
     ],
   },
   option: {
-    responsive: true, // mantém responsivo
+    responsive: true,
   },
 });
 
@@ -35,6 +35,7 @@ function atualizaGrafico(grafico, legenda, dados) {
   });
   grafico.update();
 }
+
 //cotação
 const listaCotacao = document.querySelectorAll("[data-lista]");
 function cotacao(nome, valor) {
@@ -44,6 +45,7 @@ function cotacao(nome, valor) {
     }
   });
 }
+
 function imprimeCotacao(listaCotacao, nome, valor) {
   listaCotacao.innerHTML = "";
   const plurais = {
@@ -59,20 +61,25 @@ function imprimeCotacao(listaCotacao, nome, valor) {
     listaCotacao.appendChild(itemLista);
   }
 }
-//export default imprimeCotacao
 
+// =============== DÓLAR ===============
 const workerDolar = new Worker(
   new URL("../scripts/worker/workerDolar.js", import.meta.url),
   { type: "module" }
 );
+
 workerDolar.postMessage("usd");
+
 workerDolar.addEventListener("message", (event) => {
+  if (!event.data || !event.data.USDBRL) return; // <-- impede erro
+
   let tempo = horario();
   let valor = event.data.USDBRL.ask;
   cotacao("dolar", valor);
   atualizaGrafico(graficoParaDolar, tempo, valor);
 });
 
+// =============== IENE ===============
 const graficoIene = document.getElementById("graficoIene");
 const graficoParaIene = new Chart(graficoIene, {
   type: "line",
@@ -87,17 +94,24 @@ const graficoParaIene = new Chart(graficoIene, {
     ],
   },
 });
+
 const workerIene = new Worker(
   new URL("../scripts/worker/workerIene.js", import.meta.url),
   { type: "module" }
 );
+
 workerIene.postMessage("iene");
+
 workerIene.addEventListener("message", (event) => {
+  if (!event.data || !event.data.JPYBRL) return; // <-- impede erro
+
   let tempo = horario();
   let valor = event.data.JPYBRL.ask;
   cotacao("iene", valor);
   atualizaGrafico(graficoParaIene, tempo, valor);
 });
+
+// =============== EURO ===============
 const graficoEuro = document.getElementById("graficoEuro");
 const graficoParaEuro = new Chart(graficoEuro, {
   type: "line",
@@ -112,12 +126,17 @@ const graficoParaEuro = new Chart(graficoEuro, {
     ],
   },
 });
+
 const workerEuro = new Worker(
   new URL("../scripts/worker/workerEuro.js", import.meta.url),
   { type: "module" }
 );
+
 workerEuro.postMessage("Euro");
+
 workerEuro.addEventListener("message", (event) => {
+  if (!event.data || !event.data.EURBRL) return; // <-- impede erro
+
   let tempo = horario();
   let valor = event.data.EURBRL.ask;
   cotacao("euro", valor);
