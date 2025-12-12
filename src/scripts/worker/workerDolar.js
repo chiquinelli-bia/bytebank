@@ -1,9 +1,7 @@
 import axios from "axios";
 
 async function apiMoedas() {
-  const response = await axios.get(
-    "https://economia.awesomeapi.com.br/json/last/USD-BRL"
-  );
+  const response = await axios.get(`/api/moeda?moeda=USD-BRL`);
   postMessage(response.data);
   return await response.data;
 }
