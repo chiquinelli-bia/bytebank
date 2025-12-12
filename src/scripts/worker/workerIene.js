@@ -7,5 +7,5 @@ async function apiMoedas() {
 }
 addEventListener("message", () => {
   apiMoedas();
-  setInterval(() => apiMoedas(), 5000);
+  setInterval(() => apiMoedas(), 60000);
 });
